@@ -233,6 +233,7 @@ Transform:
   m_ConstrainProportionsScale: 0
   m_Children:
   - {fileID: 1929291212}
+  - {fileID: 723888565}
   m_Father: {fileID: 0}
   m_RootOrder: 1
   m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
@@ -264,7 +265,14 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 3bc43f242153c774a8f900314fad180a, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
-  moveSpeed: 25
+  moveSpeed: 50
+  rbDrag: 4
+  jumpForce: 25
+  groundCheck: {fileID: 723888565}
+  groundDistance: 0.4
+  groundMask:
+    serializedVersion: 2
+    m_Bits: 256
 --- !u!136 &228953175
 CapsuleCollider:
   m_ObjectHideFlags: 0
@@ -618,7 +626,7 @@ PrefabInstance:
     - target: {fileID: 919132149155446097, guid: f92a09e355fd6cb4fad5f3510d12d509,
         type: 3}
       propertyPath: m_Layer
-      value: 0
+      value: 8
       objectReference: {fileID: 0}
     - target: {fileID: 919132149155446097, guid: f92a09e355fd6cb4fad5f3510d12d509,
         type: 3}
@@ -628,6 +636,37 @@ PrefabInstance:
     m_RemovedComponents: []
     m_AddedGameObjects: []
   m_SourcePrefab: {fileID: 100100000, guid: f92a09e355fd6cb4fad5f3510d12d509, type: 3}
+--- !u!1 &723888564
+GameObject:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  serializedVersion: 6
+  m_Component:
+  - component: {fileID: 723888565}
+  m_Layer: 0
+  m_Name: GroundCheck
+  m_TagString: Untagged
+  m_Icon: {fileID: 0}
+  m_NavMeshLayer: 0
+  m_StaticEditorFlags: 0
+  m_IsActive: 1
+--- !u!4 &723888565
+Transform:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 723888564}
+  m_LocalRotation: {x: -0, y: -0, z: -0, w: 1}
+  m_LocalPosition: {x: 0, y: -1.0005, z: 0}
+  m_LocalScale: {x: 1, y: 0.8, z: 1}
+  m_ConstrainProportionsScale: 0
+  m_Children: []
+  m_Father: {fileID: 228953171}
+  m_RootOrder: -1
+  m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
 --- !u!1001 &1123650734
 PrefabInstance:
   m_ObjectHideFlags: 0
@@ -719,7 +758,7 @@ PrefabInstance:
     - target: {fileID: 919132149155446097, guid: 564668953c1d5d940ab81545902134f3,
         type: 3}
       propertyPath: m_Layer
-      value: 0
+      value: 8
       objectReference: {fileID: 0}
     - target: {fileID: 919132149155446097, guid: 564668953c1d5d940ab81545902134f3,
         type: 3}
@@ -741,7 +780,7 @@ GameObject:
   - component: {fileID: 1588154210}
   - component: {fileID: 1588154209}
   - component: {fileID: 1588154208}
-  m_Layer: 0
+  m_Layer: 8
   m_Name: Main Floor
   m_TagString: Ground
   m_Icon: {fileID: 0}

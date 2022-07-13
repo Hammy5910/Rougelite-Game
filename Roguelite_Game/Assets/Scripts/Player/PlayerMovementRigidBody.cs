@@ -5,9 +5,17 @@ using UnityEngine;
 public class PlayerMovementRigidBody : MonoBehaviour
 {
     public float moveSpeed = 6f;
+    public float rbDrag = 6f;
+    public float jumpForce = 5f;
 
     float horizontalMovement;
     float verticalMovement;
+
+    bool isGrounded;
+
+    public Transform groundCheck;
+    public float groundDistance = 0.4f;
+    public LayerMask groundMask;
 
     Vector3 moveDirection;
 
@@ -21,7 +29,14 @@ public class PlayerMovementRigidBody : MonoBehaviour
 
     private void Update()
     {
+        isGrounded = Physics.CheckSphere(groundCheck.position, groundDistance, groundMask);
         MyInput();
+        ControlDrag();
+
+        if (Input.GetButtonDown("Jump") && isGrounded)
+        {
+            Jump();
+        }
     }
 
     void MyInput()
@@ -31,7 +46,17 @@ public class PlayerMovementRigidBody : MonoBehaviour
 
         moveDirection = transform.forward * verticalMovement * moveSpeed + transform.right * horizontalMovement * moveSpeed;
 
-        Debug.Log($"Move Direction{moveDirection}");
+        
+    }
+
+    void Jump()
+    {
+        rb.AddForce(transform.up * jumpForce, ForceMode.Impulse);
+    }
+
+    void ControlDrag()
+    {
+        rb.drag = rbDrag;
     }
 
     private void FixedUpdate()
