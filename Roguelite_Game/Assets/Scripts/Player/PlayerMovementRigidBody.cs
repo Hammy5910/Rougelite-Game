@@ -44,9 +44,7 @@ public class PlayerMovementRigidBody : MonoBehaviour
         horizontalMovement = Input.GetAxisRaw("Horizontal");
         verticalMovement = Input.GetAxisRaw("Vertical");
 
-        moveDirection = transform.forward * verticalMovement * moveSpeed + transform.right * horizontalMovement * moveSpeed;
-
-        
+        moveDirection = transform.forward * verticalMovement * moveSpeed + transform.right * horizontalMovement * moveSpeed; 
     }
 
     void Jump()
