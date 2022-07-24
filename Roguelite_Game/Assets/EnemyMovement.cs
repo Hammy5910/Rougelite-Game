@@ -40,22 +40,56 @@ public class EnemyMovement : MonoBehaviour
     {
         if (!walkPointSet) SearchWalkPoint();
 
+        if (walkPointSet)
+            agent.SetDestination(walkpoint);
+
+        Vector3 distanceToWalkPoint = transform.position - walkpoint;
+
+        if (distanceToWalkPoint.magnitude < 1f)
+            walkPointSet = false;
+
     }
-    private void SearchwalkPoint()
+    private void SearchWalkPoint()
     {
         float randomZ = Random.Range(-walkPointRange, walkPointRange);
-        float randomX = random.Range(-walkPointRange, walkPointRange);
-        walkPoint = new Vector3(transform.position.x + randomX, transform.position.y, transform.position.z + randomZ);
+        float randomX = Random.Range(-walkPointRange, walkPointRange);
+        walkpoint = new Vector3(transform.position.x + randomX, transform.position.y, transform.position.z + randomZ);
+
+        if (Physics.Raycast(walkpoint, -transform.up, 2f, whatIsGround))
+            walkPointSet = true;
 
     }
 
     private void ChasePlayer()
     {
+        agent.SetDestination(player.position);
+
+
 
     }
     private void AttackPlayer()
     {
+        agent.SetDestination(transform.position);
 
+        transform.LookAt(player);
+
+        if (!alreadyAttacked)
+        {
+
+            /// Attack code here
+            
+            
+            
+            /// 
+
+            alreadyAttacked = true;
+            Invoke(nameof(ResetAttack), timeBetweenAttacks);
+        }
+    }
+
+    private void ResetAttack()
+    {
+        alreadyAttacked = false;
     }
 
 }
